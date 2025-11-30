@@ -4,7 +4,7 @@ const Product = require('../models/Product');
 const getProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = Math.min(parseInt(req.query.limit) || 10, 10);
     const search = req.query.search || '';
     const category = req.query.category;
     const size = req.query.size;
@@ -50,15 +50,4 @@ const getProductById = async (req, res) => {
   }
 };
 
-// Get Categories of Products from DB
-const getCategories = async (req, res) => {
-  try {
-    const categories = await Product.distinct('category');
-    res.json(categories);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
-};
-
-module.exports = { getProducts, getProductById, getCategories };
+module.exports = { getProducts, getProductById };

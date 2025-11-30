@@ -4,7 +4,6 @@ import ProductCard from '../components/ProductCard';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
   const [size, setSize] = useState('');
@@ -12,12 +11,6 @@ const Products = () => {
   const [maxPrice, setMaxPrice] = useState('');
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    axios.get('/api/products/categories')
-      .then(res => setCategories(res.data))
-      .catch(err => console.error(err));
-  }, []);
 
   useEffect(() => {
     fetchProducts();
@@ -39,7 +32,9 @@ const Products = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <select value={category} onChange={e => setCategory(e.target.value)} className="border p-2 rounded">
             <option value="">All Categories</option>
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
           </select>
           <select value={size} onChange={e => setSize(e.target.value)} className="border p-2 rounded">
             <option value="">All Sizes</option>
