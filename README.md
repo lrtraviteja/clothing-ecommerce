@@ -2,6 +2,8 @@
 
 Full-stack MERN e-commerce application for a clothing brand with user authentication, product browsing, shopping cart, and order management.
 
+**🚀 Live Demo:** https://clothing-ecommerce-pi.vercel.app/
+
 ## Features
 
 - User registration and login with JWT authentication
