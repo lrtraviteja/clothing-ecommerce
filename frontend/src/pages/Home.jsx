@@ -6,7 +6,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/products?limit=8')
+    axios.get('/api/products?limit=10')
       .then(res => setProducts(res.data.products))
       .catch(err => console.error(err));
   }, []);
