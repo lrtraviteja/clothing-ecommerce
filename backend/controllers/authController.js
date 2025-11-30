@@ -40,7 +40,7 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-    // merge guest cart (if provided) into user's DB cart
+    // Merge guest cart as Logged In user cart
     if (Array.isArray(guestCart) && guestCart.length > 0) {
       let cart = await Cart.findOne({ user: user._id });
       if (!cart) cart = await Cart.create({ user: user._id, items: [] });

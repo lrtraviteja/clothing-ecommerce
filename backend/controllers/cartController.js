@@ -1,7 +1,7 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 
-// For authenticated users only (cart stored in DB)
+// get User Cart from DB
 const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user.id }).populate('items.product');
@@ -13,6 +13,7 @@ const getCart = async (req, res) => {
   }
 };
 
+// add orderItem to Cart
 const addToCart = async (req, res) => {
   try {
     const { productId, size, qty } = req.body;
@@ -43,6 +44,7 @@ const addToCart = async (req, res) => {
   }
 };
 
+// update quantity of a cart item
 const updateCartItem = async (req, res) => {
   try {
     const { itemId, qty } = req.body;
@@ -66,6 +68,7 @@ const updateCartItem = async (req, res) => {
   }
 };
 
+// remove item from cart
 const removeCartItem = async (req, res) => {
   try {
     const { itemId } = req.body;

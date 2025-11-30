@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 
-// GET /api/products
+// GET Products Query
 const getProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -38,6 +38,7 @@ const getProducts = async (req, res) => {
   }
 };
 
+// GET Product by ID
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -49,6 +50,7 @@ const getProductById = async (req, res) => {
   }
 };
 
+// Get Categories of Products from DB
 const getCategories = async (req, res) => {
   try {
     const categories = await Product.distinct('category');

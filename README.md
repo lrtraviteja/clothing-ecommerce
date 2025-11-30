@@ -17,7 +17,7 @@ Full-stack MERN e-commerce application for a clothing brand with user authentica
 
 **Backend:**
 - Node.js & Express.js
-- MongoDB & Mongoose
+- MongoDB (Mongoose)
 - JWT authentication with HTTP-only cookies
 - bcryptjs for password hashing
 - Nodemailer for email notifications
@@ -33,15 +33,15 @@ Full-stack MERN e-commerce application for a clothing brand with user authentica
 ## Prerequisites
 
 - Node.js v18+
-- MongoDB (local or Atlas)
-- Gmail account for email (or Mailtrap for testing)
+- MongoDB (Atlas)
+- Gmail account (with App Password Enabled)
 
 ## Setup Instructions
 
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/lrtraviteja/clothing-ecommerce.git
 cd clothing-ecommerce
 ```
 
@@ -58,7 +58,6 @@ Create `.env` file in backend folder:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_strong_secret_key
-NODE_ENV=development
 EMAIL_USER=yourgmail@gmail.com
 EMAIL_PASS=your_gmail_app_password
 ```
@@ -68,14 +67,6 @@ EMAIL_PASS=your_gmail_app_password
 2. Go to Google Account → Security → App passwords
 3. Generate password for "Mail"
 4. Use the 16-character password in EMAIL_PASS
-
-**Alternative - Use Mailtrap for testing:**
-```env
-MAILTRAP_USER=your_mailtrap_user
-MAILTRAP_PASS=your_mailtrap_pass
-MAILTRAP_HOST=smtp.mailtrap.io
-MAILTRAP_PORT=2525
-```
 
 Seed the database with sample products:
 
@@ -93,7 +84,8 @@ npm install
 Create `.env` file in frontend folder:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=http://localhost:5000  #Backend server URL
+VITE_API_PORT=5000                       #Backend server port - (Should be same as PORT in 'backend/.env')
 ```
 
 ## Running the Application
@@ -237,7 +229,6 @@ clothing-ecommerce/
 **Email Not Sending:**
 - Verify Gmail App Password (not regular password)
 - Check EMAIL_USER and EMAIL_PASS in .env
-- Use Mailtrap for testing instead
 
 **CORS Issues:**
 - Ensure backend CORS is configured for frontend URL
