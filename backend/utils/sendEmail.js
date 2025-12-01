@@ -14,7 +14,7 @@ const transporter = createTransporter();
 
 // Order Confirmation Email
 const sendOrderEmail = async (order, user) => {
-  console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Missing');
+  console.log('EMAIL_USER:', process.env.EMAIL_USER ?  process.env.EMAIL_USER : 'Missing');
   console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Missing');
   console.log('Transporter:', transporter ? 'Created' : 'Not created');
   
