@@ -19,7 +19,7 @@ const register = async (req, res) => {
     const user = await User.create({ name, email, password: hashed });
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.cookie('token', token, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true });
     res.status(201).json({ id: user._id, name: user.name, email: user.email });
   } catch (err) {
     console.error(err);
@@ -58,7 +58,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
+    res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true });
     res.json({ id: user._id, name: user.name, email: user.email });
   } catch (err) {
     console.error(err);
