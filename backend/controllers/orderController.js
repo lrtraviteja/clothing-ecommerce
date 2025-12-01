@@ -43,12 +43,10 @@ const getOrderById = async (req, res) => {
     for (let i of order.items) {
       await Product.findByIdAndUpdate(i.product, {$inc: {stock: -i.qty}});
     }
-    // Send Confirmation Email
-    try {
-      sendOrderEmail(order, req.user);
-    } catch (e) {
-      console.error('Email send failed', e.message);
-    }
+    // Send Confirmation Email (non-blocking)
+    sendOrderEmail(order, order.user).catch(e => {
+      console.error('Email failed (SMTP blocked on Render free tier):', e.message);
+    });
     
     res.json(order);
   } catch (err) {
