@@ -17,7 +17,7 @@ const sendOrderEmail = async (order, user) => {
   if (process.env.NODE_ENV === 'production' && process.env.RESEND_API_KEY) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { data } = await resend.emails.send({
-      from: 'FashionHub <onboarding@resend.dev>',
+      from: 'ClothApp <onboarding@resend.dev>',
       to: [to],
       subject: `Order Confirmation - #${order._id}`,
       html: htmlContent
