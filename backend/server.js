@@ -18,7 +18,7 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({origin: true, credentials: true}));
 
 // Routes
 app.use('/api/auth', authRoutes);
