@@ -14,7 +14,16 @@ const transporter = createTransporter();
 
 // Order Confirmation Email
 const sendOrderEmail = async (order, user) => {
+  console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Missing');
+  console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Missing');
+  console.log('Transporter:', transporter ? 'Created' : 'Not created');
+  
+  if (!transporter) {
+    throw new Error('Email transporter not configured');
+  }
+  
   const to = (user && user.email) || process.env.EMAIL_USER || 'no-reply@example.com';
+  console.log('Sending to:', to);
   const htmlItems = order.items.map(item => `<p>${item.name} (${item.size}) x${item.qty} - ₹${item.price}</p>`).join('');
 
   const mailOptions = {
@@ -31,11 +40,12 @@ const sendOrderEmail = async (order, user) => {
   };
 
   try {
+    console.log('Sending email...');
     const result = await transporter.sendMail(mailOptions);
-    console.log('Order email sent:', result && result.messageId ? result.messageId : 'ok');
+    console.log('Email sent successfully:', result.messageId);
     return result;
   } catch (err) {
-    console.error('Error sending order email:', err.message || err);
+    console.error('Email error:', err);
     throw err;
   }
 };
