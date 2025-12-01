@@ -43,8 +43,8 @@ const Products = () => {
             <option value="L">L</option>
             <option value="XL">XL</option>
           </select>
-          <input type="number" placeholder="Min ₹" value={minPrice} onChange={e => setMinPrice(e.target.value)} className="border p-2 rounded" />
-          <input type="number" placeholder="Max ₹" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} className="border p-2 rounded" />
+          <input type="number" placeholder="Min ₹" value={minPrice} min={0} onChange={e => setMinPrice(e.target.value)} className="border p-2 rounded" />
+          <input type="number" placeholder="Max ₹" value={maxPrice} min={0} onChange={e => setMaxPrice(e.target.value)} className="border p-2 rounded" />
         </div>
         <button onClick={() => { setSearch(''); setCategory(''); setSize(''); setMinPrice(''); setMaxPrice(''); }} className={`mt-3 p-2 rounded text-white w-full md:w-auto md:px-6 font-semibold ${search || category || size || minPrice || maxPrice ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-400'}`}>Clear Filters</button>
       </div>
